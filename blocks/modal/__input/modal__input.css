@@ -1,0 +1,12 @@
+.modal__input {
+    border: none;
+    border-bottom: 1px solid;
+    opacity: 0.2;
+    width: 100%;
+    padding: 0 0 13px;
+    margin-bottom: 30px;
+}
+
+.modal__input:last-of-type {
+    margin-bottom: 48px;
+}

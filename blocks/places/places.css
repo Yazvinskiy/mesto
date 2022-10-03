@@ -2,7 +2,8 @@
    margin-top: 50px;
 }
 
-@media screen and (max-width: 480px) {
+
+@media screen and (max-width: 700px) {
    .places {
       margin-top: 36px;
    }
