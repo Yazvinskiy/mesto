@@ -24,8 +24,12 @@ const handleModalClick = (event) => {
 
 modal.addEventListener('click', handleModalClick);
 
- function handleModalSubmit(){
-    
+function modalSubmitHandler(evt) {
+    evt.preventDefault(evt);
     profileName.textContent = inputName.value;
     profileProfession.textContent = inputProfession.value;
+    if (form.contains(evt.target)) {
+        modal.classList.remove(MODAL_ACTIVE_CLASS);
+    }
 }
+form.addEventListener('submit', modalSubmitHandler); 
