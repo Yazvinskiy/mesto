@@ -1,4 +1,4 @@
-.modal__btn-save {
+.popup__btn-save {
     cursor: pointer;
     width: 100%;
     height: 50px;
@@ -6,8 +6,11 @@
     border: 2px solid #FFFFFF;
     border-radius: 2px;
     color: #FFFFFF;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 21.78px;
 }
 
-.modal__btn-save:hover {
+.popup__btn-save:hover {
     opacity: 0.8;
 }

@@ -1,3 +1,6 @@
+.header__logo{
+padding-bottom: 38px;
+}
 
 @media screen and (max-width: 700px) {
     .header__logo {

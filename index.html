@@ -6,14 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="pages/index.css">
     <title>Mesto</title>
-    <script defer src="./scripts/sripts.js"></script>
 </head>
 
 <body class="page">
     <div class="container">
         <header class="header">
             <img class="header__logo" src="images/header-logo.svg" alt="Лого-место">
-            <hr class="header__hr-line">
         </header>
         <main>
             <section class="profile">
@@ -22,13 +20,13 @@
                     <div class="profile__content">
                         <div class="profile__info">
                             <h1 class="profile__title">Жак-Ив Кусто</h1>
-                            <button class="profile__edit-button">
+                            <button type="button" class="profile__edit-button">
                             </button>
                         </div>
                         <p class="profile__subtitle">Исследователь океана</p>
                     </div>
                 </div>
-                <button class="profile__add-button">
+                <button type="button" class="profile__add-button">
                 </button>
             </section>
             <section class="places">
@@ -37,7 +35,7 @@
                         <img class="places__image" src="images/kurchaivsk.jpg" alt="Курчаевск">
                         <div class="places__content">
                             <h2 class="places__tilte">Карачаевск</h2>
-                            <button class="places__icon-like"></button>
+                            <button type="button" class="places__icon-like"></button>
                         </div>
 
                     </li>
@@ -45,7 +43,7 @@
                         <img class="places__image" src="images/albrus.jpg" alt="Гора Эльбрус">
                         <div class="places__content">
                             <h2 class="places__tilte">Гора Эльбрус</h2>
-                            <button class="places__icon-like"></button>
+                            <button type="button" class="places__icon-like"></button>
                         </div>
 
                     </li>
@@ -53,7 +51,7 @@
                         <img class="places__image" src="images/dombai.jpg" alt="Домбай">
                         <div class="places__content">
                             <h2 class="places__tilte">Домбай</h2>
-                            <button class="places__icon-like"></button>
+                            <button type="button" class="places__icon-like"></button>
                         </div>
 
                     </li>
@@ -61,14 +59,14 @@
                         <img class="places__image" src="images/albrus.jpg" alt="Гора Эльбрус">
                         <div class="places__content">
                             <h2 class="places__tilte">Гора Эльбрус</h2>
-                            <button class="places__icon-like"></button>
+                            <button type="button" class="places__icon-like"></button>
                         </div>
                     </li>
                     <li class="places__item">
                         <img class="places__image" src="images/dombai.jpg" alt="Домбай">
                         <div class="places__content">
                             <h2 class="places__tilte">Домбай</h2>
-                            <button class="places__icon-like"></button>
+                            <button type="button" class="places__icon-like"></button>
                         </div>
 
                     </li>
@@ -76,7 +74,7 @@
                         <img class="places__image" src="images/kurchaivsk.jpg" alt="Карачаево-Черкессия">
                         <div class="places__content">
                             <h2 class="places__tilte">Карачаево-Черкессия</h2>
-                            <button class="places__icon-like"></button>
+                            <button type="button" class="places__icon-like"></button>
                         </div>
                     </li>
                 </ul>
@@ -86,17 +84,18 @@
             <p class="footer__copyright">© 2020 Mesto Russia</p>
         </footer>
     </div>
-    <section class="modal">
-        <div class="modal__conteiner">
-            <button class="modal__btn-close"></button>
-            <h2 class="modal__title">Редактировать профиль</h2>
-            <form class="modal__form">
-                <input name="name" class="modal__input modal__input_name">
-                <input name="profession" class="modal__input modal__input_profession">
-                <button class="modal__btn-save">Сохранить</button>
+    <section class="popup">
+        <div class="popup__conteiner">
+            <button type="button" class="popup__btn-close"></button>
+            <h2 class="popup__title">Редактировать профиль</h2>
+            <form name="popup"  action="#" class="popup__form">
+                <input name="name" type="text" class="popup__input popup__input_user_name">
+                <input name="profession" type="text" class="popup__input popup__input_user_profession">
+                <button type="submit" class="popup__btn-save">Сохранить</button>
             </form>
         </div>
     </section>
+    <script defer src="./scripts/index.js"></script>
 </body>
 
 </html>
