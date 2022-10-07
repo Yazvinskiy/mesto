@@ -1,7 +1,7 @@
 const POPUP_OPENED_CLASS = 'popup_opened';
 const openPopupBtn = document.querySelector(".profile__edit-button");
 const popup = document.querySelector(".popup");
-const popupConteiner = popup.querySelector(".popup__container");
+const popupContainer = popup.querySelector(".popup__container");
 const popupCloseBtn = popup.querySelector(".popup__btn-close");
 const form = document.querySelector(".popup__form");
 const inputName = document.querySelector(".popup__input_user_name");
@@ -16,7 +16,7 @@ function openPopup() {
 };
 
 function handlePopupClick(event) {
-    if (!popupConteiner.contains(event.target) || event.target === popupCloseBtn) {
+    if (!popupContainer.contains(event.target) || event.target === popupCloseBtn) {
         popup.classList.remove(POPUP_OPENED_CLASS);
     }
 };
