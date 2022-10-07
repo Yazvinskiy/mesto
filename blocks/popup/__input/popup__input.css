@@ -2,12 +2,12 @@
     border: none;
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
     width: 100%;
-    padding: 0 0 13px;
     margin-bottom: 30px;
     color: #000000;
     font-weight: 400;
     font-size: 14px;
     line-height: 16.94px;
+    height: 27px;
 }
 
 .popup__input:last-of-type {
@@ -15,7 +15,11 @@
 }
 
 @media screen and (max-width: 700px) {
+    .popup__input {
+        margin-bottom: 27px;
+    }
+
     .popup__input:last-of-type {
-        margin-bottom: 45px;
+        margin-bottom: 44px;
     }
 }
