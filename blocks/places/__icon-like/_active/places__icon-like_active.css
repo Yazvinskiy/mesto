@@ -1,5 +1,5 @@
 .places__icon-like_active {
-    background-image: url('../../../../images/button-like_active.svg') no-repeat;
+    background: url('../../../../images/button-like_active.svg') no-repeat;
     cursor: pointer;
     border: none;
     width: 22px;

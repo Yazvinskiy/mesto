@@ -9,11 +9,13 @@
 </head>
 
 <body class="page">
+
     <div class="container">
         <header class="header">
             <img class="header__logo" src="images/header-logo.svg" alt="Лого-место">
         </header>
         <main>
+
             <section class="profile">
                 <div class="profile__wrapper">
                     <img class="profile__avatar" src="images/Avatar.jpg" alt="аватарка">
@@ -31,7 +33,6 @@
             </section>
 
             <section class="places">
-            
             </section>
 
         </main>
@@ -39,6 +40,7 @@
             <p class="footer__copyright">© 2020 Mesto Russia</p>
         </footer>
     </div>
+
     <section class="popup">
         <div class="popup__container">
             <button type="button" class="popup__btn-close"></button>
@@ -50,27 +52,39 @@
             </form>
         </div>
     </section>
+
     <section class="popup popup__place">
         <div class="popup__container">
             <button type="button" class="popup__btn-close"></button>
             <h2 class="popup__title">Новое место</h2>
-            <form name="popup"  action="#" class="popup__form">
-                <input name="title" type="text" placeholder="Название" class="popup__input popup__input_title">
-                <input name="link-image" type="url" placeholder="Ссылка на картинку" class="popup__input popup__input_link-image">
+            <form name="popup"  action="#" class="popup__form popup__form-card">
+                <input name="title" type="text" placeholder="Название" class="popup__input popup__input_card_title">
+                <input name="link-image" type="url" placeholder="Ссылка на картинку" class="popup__input popup__input_card_link">
                 <button type="submit" class="popup__btn-save">Создать</button>
             </form>
         </div>
     </section>
+
+    <div class="popup popup-full-image">
+    <figure class="popup__figure">
+        <button type="button" class="popup__btn-close"></button>
+        <img  class="popup__image" src="images/dombai.jpg"
+              alt="Слон на фоне заката">
+        <figcaption class="popup__caption">Слон на фоне заката</figcaption>
+      </figure>
+    </div>
+
     <template id="template-cards">
         <article class="places__card">
-                <img class="places__image" src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg" alt="Архыз">
+                <img class="places__image">
                 <button type="button" class="places__icon-basket"></button>
                 <div class="places__content">
-                    <h2 class="places__title">Архыз</h2>
+                    <h2 class="places__title"></h2>
                     <button type="button" class="places__icon-like"></button>
                 </div>
             </article>
     </template> 
+
     <script defer src="./scripts/index.js"></script>
 </body>
 
