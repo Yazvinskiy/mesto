@@ -26,8 +26,8 @@ const initialCards = [
 ];
 
 const inputCard = document.querySelector(".popup__input_card_title");
-const inputLinkCard = document.querySelector(".popup__input_card_link")
-const formInputCard = document.querySelector(".popup__form-card")
+const inputLinkCard = document.querySelector(".popup__input_card_link");
+const formInputCard = document.querySelector(".popup__form-card");
 const sectionPlace = document.querySelector(".places");
 const cardsTemplate = document.querySelector('#template-cards').content;
 const POPUP_OPENED_CLASS = 'popup_opened';
@@ -61,23 +61,24 @@ function createCard(name, link) {
     event.target.classList.toggle('places__icon-like_active');
   });
 
-  cardsElementImg.addEventListener('click', () => {
-    popupImg.setAttribute('src', link);
-    popupFullImgCaption.setAttribute('alt', name);
-    popupFullImgCaption.textContent = name;
-    popupFullImage.classList.add(POPUP_OPENED_CLASS);
-  });
-  
-  
+  cardsElementImg.addEventListener('click',handleCardClick());
+ 
+ 
 };
 
-
+function handleCardClick(){
+  popupImg.setAttribute('src', link);
+  popupFullImgCaption.setAttribute('alt', name);
+  popupFullImgCaption.textContent = name;
+  popupFullImage.classList.add(POPUP_OPENED_CLASS);
+}
 
 
 function initSections() {
   initialCards.forEach(element => {
     createCard(element.name, element.link);
   });
+  
 };
 
 
@@ -90,7 +91,7 @@ function openPopup() {
 
 function openPopupPlace() {
   popupPlace.classList.add(POPUP_OPENED_CLASS);
-
+ 
 };
 
 function handlePopupClick(event) {
@@ -113,7 +114,7 @@ const handleSubmitCard = (event) => {
   const newCard = inputCard.value;
   console.log("newCard");
 };
-formInputCard.addEventListener("submit", handleSubmitCard);
+
 
 //delete cards
 const removeCard = (element) => {
@@ -128,4 +129,5 @@ popupBtnAdd.addEventListener("click", openPopupPlace);
 popup.addEventListener('click', handlePopupClick);
 popupPlace.addEventListener('click', handlePopupClick);
 form.addEventListener('submit', popupSubmitHandler);
+formInputCard.addEventListener("submit", handleSubmitCard);
 initSections();

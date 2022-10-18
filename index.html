@@ -45,7 +45,7 @@
         <div class="popup__container">
             <button type="button" class="popup__btn-close"></button>
             <h2 class="popup__title">Редактировать профиль</h2>
-            <form name="popup"  action="#" class="popup__form">
+            <form name="popup" action="#" class="popup__form">
                 <input name="name" type="text" class="popup__input popup__input_user_name">
                 <input name="profession" type="text" class="popup__input popup__input_user_profession">
                 <button type="submit" class="popup__btn-save">Сохранить</button>
@@ -57,33 +57,33 @@
         <div class="popup__container">
             <button type="button" class="popup__btn-close"></button>
             <h2 class="popup__title">Новое место</h2>
-            <form name="popup"  action="#" class="popup__form popup__form-card">
+            <form name="popup" action="#" class="popup__form popup__form-card">
                 <input name="title" type="text" placeholder="Название" class="popup__input popup__input_card_title">
-                <input name="link-image" type="url" placeholder="Ссылка на картинку" class="popup__input popup__input_card_link">
+                <input name="link-image" type="url" placeholder="Ссылка на картинку"
+                    class="popup__input popup__input_card_link">
                 <button type="submit" class="popup__btn-save">Создать</button>
             </form>
         </div>
     </section>
 
     <div class="popup popup-full-image">
-    <figure class="popup__figure">
-        <button type="button" class="popup__btn-close"></button>
-        <img  class="popup__image" src="images/dombai.jpg"
-              alt="Слон на фоне заката">
-        <figcaption class="popup__caption">Слон на фоне заката</figcaption>
-      </figure>
+        <figure class="popup__figure">
+            <button type="button" class="popup__btn-close"></button>
+            <img class="popup__image" src="images/Avatar.jpg" alt="Слон на фоне заката">
+            <figcaption class="popup__caption">Слон на фоне заката</figcaption>
+        </figure>
     </div>
 
     <template id="template-cards">
         <article class="places__card">
-                <img class="places__image">
-                <button type="button" class="places__icon-basket"></button>
-                <div class="places__content">
-                    <h2 class="places__title"></h2>
-                    <button type="button" class="places__icon-like"></button>
-                </div>
-            </article>
-    </template> 
+            <img class="places__image">
+            <button type="button" class="places__icon-basket"></button>
+            <div class="places__content">
+                <h2 class="places__title"></h2>
+                <button type="button" class="places__icon-like"></button>
+            </div>
+        </article>
+    </template>
 
     <script defer src="./scripts/index.js"></script>
 </body>
