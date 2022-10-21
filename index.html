@@ -41,13 +41,13 @@
         </footer>
     </div>
 
-    <section class="popup">
+    <section class="popup popup_type_edit-profile">
         <div class="popup__container">
             <button type="button" class="popup__btn-close"></button>
             <h2 class="popup__title">Редактировать профиль</h2>
             <form name="popup" action="#" class="popup__form">
-                <input name="name" type="text" class="popup__input popup__input_user_name">
-                <input name="profession" type="text" class="popup__input popup__input_user_profession">
+                <input name="name" type="text" placeholder="Имя" class="popup__input popup__input_user_name">
+                <input name="profession" type="text"  placeholder="Вид деятельности" class="popup__input popup__input_user_profession">
                 <button type="submit" class="popup__btn-save">Сохранить</button>
             </form>
         </div>
@@ -66,7 +66,7 @@
         </div>
     </section>
 
-    <div class="popup popup-full-image">
+    <div class="popup popup_type_full-image">
             <figure class="popup__figure">
                 <button type="button" class="popup__btn-close"></button>
                 <img class="popup__image" src="images/Avatar.jpg" alt="Слон на фоне заката">
