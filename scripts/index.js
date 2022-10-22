@@ -27,7 +27,7 @@ const initialCards = [
 
 const inputCardTitle = document.querySelector(".popup__input_card_title");
 const inputLinkCard = document.querySelector(".popup__input_card_link");
-const formCard = document.querySelector(".popup__form-card");
+const formAddCard = document.querySelector(".popup__form-card");
 const sectionPlace = document.querySelector(".places");
 const cardsTemplate = document.querySelector('#template-cards').content;
 const POPUP_OPENED_CLASS = 'popup_opened';
@@ -38,7 +38,7 @@ const popup = document.querySelector(".popup");
 const popupPlace = document.querySelector(".popup_type_place");
 const popupContainer = popup.querySelector(".popup__container");
 const popupCloseBtn = document.querySelectorAll(".popup__btn-close");
-const form = document.querySelector(".popup__form");
+const formEditProfile = document.querySelector(".popup__form");
 const inputName = document.querySelector(".popup__input_user_name");
 const inputProfession = document.querySelector(".popup__input_user_profession");
 const profileName = document.querySelector(".profile__title");
@@ -84,7 +84,7 @@ function initSections() {
 
 //open popups
 function openPopup(popup) {
-  popup.classList.add('popup_opened');
+  popup.classList.add(POPUP_OPENED_CLASS);
 }
 
 function openEditProfilePopup() {
@@ -101,25 +101,22 @@ function openPopupPlace() {
   openPopup(popupPlace);
 }
 
-function handleSubmitPopup(evt) {
+function submitEditProfilePopup(evt) {
   evt.preventDefault(evt);
   profileName.textContent = inputName.value;
   profileProfession.textContent = inputProfession.value;
-  if (form.contains(evt.target)) {
-    popup.classList.remove(POPUP_OPENED_CLASS);
-  }
+  closePopup(popupEditProfile)
 }
 
 // submit cards
 const handleSubmitCard = (event) => {
   event.preventDefault();
-  const popup = event.target.closest('.popup');
   const newCardTitle = inputCardTitle.value;
   const newCardLink = inputLinkCard.value;
   const newCard = createCard(newCardTitle, newCardLink);
   addCard(newCard);
   resetForm();
-  closePopup(popup);
+  closePopup(popupPlace);
 }
 
 function addCard(cardsElement) {
@@ -132,7 +129,7 @@ const removeCard = (element) => {
 }
 
 function closePopup(popup) {
-  popup.classList.remove('popup_opened');
+  popup.classList.remove(POPUP_OPENED_CLASS);
 }
 
 popupCloseBtn.forEach((button) => {
@@ -147,7 +144,7 @@ function resetForm() {
 
 popupBtnEdit.addEventListener('click', () => openEditProfilePopup());
 popupBtnAdd.addEventListener('click', () => openPopupPlace());
-form.addEventListener('submit', handleSubmitPopup);
-formCard.addEventListener("submit", handleSubmitCard);
+formEditProfile.addEventListener('submit', submitEditProfilePopup);
+formAddCard.addEventListener("submit", handleSubmitCard);
 initSections();
 
