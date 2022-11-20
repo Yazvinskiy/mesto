@@ -1,4 +1,4 @@
-import{submitButtonIndisibled}from './validate.js';
+import {submitButtonIndisibled} from './validate.js';
 
 const initialCards = [
   {

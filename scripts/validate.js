@@ -35,7 +35,7 @@ const submitButtonDisabled = (config, buttonElement) => {
 }
 
 
-function submitButtonIndisibled(config, buttonElement)  {
+export function submitButtonIndisibled(config, buttonElement)  {
   buttonElement.disabled = false;
 }
 
@@ -65,7 +65,7 @@ inputList.forEach((inputElement) => {
 }
 
   const enableValidation = (config) => {
-    formList = Array.from(document.querySelectorAll(config.formSelector));
+    const formList = Array.from(document.querySelectorAll(config.formSelector));
     formList.forEach((formElement) => {
       setEventListeners(config, formElement);
     });
