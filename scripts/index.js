@@ -85,7 +85,7 @@ function initSections() {
 //open popups
 function openPopup(popup) {
   popup.classList.add(POPUP_OPENED_CLASS);
-  document.body.addEventListener('keydown', closePopupByEsc);  //why? add adlis and remove adl ! смысл в body
+  document.body.addEventListener('keydown', closePopupByEsc); 
 }
 
 function openEditProfilePopup() {
@@ -125,6 +125,7 @@ const handleSubmitCard = (event) => {
 
 function addCard(cardsElement) {
 sectionPlace.prepend(cardsElement);
+resetForm();
 };
 
 //delete cards
@@ -135,7 +136,12 @@ const removeCard = (element) => {
 function closePopup(popup) {
   popup.classList.remove(POPUP_OPENED_CLASS);
   document.body.removeEventListener('keydown', closePopupByEsc);
+  
 }
+
+popups.forEach((popup) => {
+  popup.addEventListener('click', (evt) => closePopup(evt.target)); //??
+})
 
 function closePopupByEsc(evt) {
   if(evt.key === "Escape") {
@@ -153,22 +159,13 @@ function resetForm() {
   inputLinkCard.value = "";
 }
 
-popupBtnEdit.addEventListener('click', () => openEditProfilePopup()); //?? str fun and end()
-popupBtnAdd.addEventListener('click', () => openPopupPlace());   //зачем callback
+popupBtnEdit.addEventListener('click',  openEditProfilePopup); 
+popupBtnAdd.addEventListener('click',  openPopupPlace);   
 formEditProfile.addEventListener('submit', submitEditProfilePopup);
 formAddCard.addEventListener("submit", handleSubmitCard);
 initSections();
 
-/*document.addEventListener('click', (e) => {
-  if(e.target == popup) {
-    popups.forEach((popup) => {
-      popup.classList.remove(POPUP_OPENED_CLASS);
-    });
-  }
-}); */
 
-popups.forEach((popup) => {
-  popup.addEventListener('click', (evt) => closePopup(evt.target)); //??
-  
-})
+
+
 
