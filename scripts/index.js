@@ -46,6 +46,7 @@ const profileProfession = document.querySelector(".profile__subtitle");
 const popupFullImage = document.querySelector(".popup_type_full-image");
 const popupImg = document.querySelector(".popup__image");
 const popupFullImgCaption = document.querySelector(".popup__caption");
+const popups = document.querySelectorAll('.popup');
 
 
 
@@ -63,7 +64,7 @@ function createCard(name, link) {
   
 
   imgWrapper.addEventListener('click', function (event) {
-    const currentCard = event.target;
+    const currentCard = event.target;   
     const name = currentCard.alt;
     const link = currentCard.src;
     popupImg.setAttribute('src', link);
@@ -79,33 +80,36 @@ function initSections() {
     const newCard = createCard(element.name, element.link);
     addCard(newCard);
   });
-
 }
 
 //open popups
 function openPopup(popup) {
   popup.classList.add(POPUP_OPENED_CLASS);
+  document.body.addEventListener('keydown', closePopupByEsc);  //why? add adlis and remove adl ! смысл в body
 }
 
 function openEditProfilePopup() {
   inputName.value = profileName.textContent;
   inputProfession.value = profileProfession.textContent;
   openPopup(popupEditProfile);
+  submitButtonIndisibled(config, buttonElement); //??
 }
-
-function likeCard(cardsElement) {
-  cardsElement.classList.toggle('places__icon-like_active');
-};
 
 function openPopupPlace() {
   openPopup(popupPlace);
 }
 
+
+function likeCard(cardsElement) {
+  cardsElement.classList.toggle('places__icon-like_active');
+};
+
+
 function submitEditProfilePopup(evt) {
   evt.preventDefault(evt);
   profileName.textContent = inputName.value;
   profileProfession.textContent = inputProfession.value;
-  closePopup(popupEditProfile)
+  closePopup(popupEditProfile);
 }
 
 // submit cards
@@ -115,8 +119,8 @@ const handleSubmitCard = (event) => {
   const newCardLink = inputLinkCard.value;
   const newCard = createCard(newCardTitle, newCardLink);
   addCard(newCard);
-  resetForm();
   closePopup(popupPlace);
+  resetForm();
 }
 
 function addCard(cardsElement) {
@@ -125,12 +129,19 @@ sectionPlace.prepend(cardsElement);
 
 //delete cards
 const removeCard = (element) => {
-  element.remove()
+  element.remove();
 }
 
 function closePopup(popup) {
   popup.classList.remove(POPUP_OPENED_CLASS);
+  document.body.removeEventListener('keydown', closePopupByEsc);
 }
+
+function closePopupByEsc(evt) {
+  if(evt.key === "Escape") {
+    closePopup(document.querySelector('.popup_opened')); //? 
+  }
+  }
 
 popupCloseBtn.forEach((button) => {
   const popup = button.closest('.popup');
@@ -142,9 +153,22 @@ function resetForm() {
   inputLinkCard.value = "";
 }
 
-popupBtnEdit.addEventListener('click', () => openEditProfilePopup());
-popupBtnAdd.addEventListener('click', () => openPopupPlace());
+popupBtnEdit.addEventListener('click', () => openEditProfilePopup()); //?? str fun and end()
+popupBtnAdd.addEventListener('click', () => openPopupPlace());   //зачем callback
 formEditProfile.addEventListener('submit', submitEditProfilePopup);
 formAddCard.addEventListener("submit", handleSubmitCard);
 initSections();
+
+/*document.addEventListener('click', (e) => {
+  if(e.target == popup) {
+    popups.forEach((popup) => {
+      popup.classList.remove(POPUP_OPENED_CLASS);
+    });
+  }
+}); */
+
+popups.forEach((popup) => {
+  popup.addEventListener('click', (evt) => closePopup(evt.target)); //??
+  
+})
 
