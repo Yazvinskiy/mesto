@@ -95,7 +95,7 @@ function openPopup(popup) {
 function openEditProfilePopup() {
   inputName.value = profileName.textContent;
   inputProfession.value = profileProfession.textContent;
-  submitButtonIndisibled(config, buttonElement); 
+  submitButtonIndisibled(popupEditProfile.querySelector('.popup__btn-save')); 
   openPopup(popupEditProfile);
 }
 

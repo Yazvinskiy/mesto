@@ -30,12 +30,12 @@ const checkInputValidity = (config, formElement, inputElement) => {
   }
 }
 
-const submitButtonDisabled = (config, buttonElement) => {
+const submitButtonDisabled = (buttonElement) => {
   buttonElement.disabled = true;
 }
 
 
-export function submitButtonIndisibled(config, buttonElement)  {
+export function submitButtonIndisibled(buttonElement)  {
   buttonElement.disabled = false;
 }
 
@@ -80,3 +80,4 @@ inputList.forEach((inputElement) => {
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__error_visible'
 }); 
+
