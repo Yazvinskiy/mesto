@@ -34,7 +34,8 @@ const submitButtonDisabled = (config, buttonElement) => {
   buttonElement.disabled = true;
 }
 
-const submitButtonIndisibled = (config, buttonElement) => {
+
+function submitButtonIndisibled(config, buttonElement)  {
   buttonElement.disabled = false;
 }
 

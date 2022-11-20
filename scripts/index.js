@@ -1,3 +1,5 @@
+import{submitButtonIndisibled}from './validate.js';
+
 const initialCards = [
   {
     name: 'Архыз',
@@ -50,6 +52,7 @@ const popups = document.querySelectorAll('.popup');
 
 
 
+
 function createCard(name, link) {
   const cardsElement = cardsTemplate.querySelector('.places__card').cloneNode(true);
   const cardsElementImg = cardsTemplate.querySelector('.places__image');
@@ -88,11 +91,12 @@ function openPopup(popup) {
   document.body.addEventListener('keydown', closePopupByEsc); 
 }
 
+
 function openEditProfilePopup() {
   inputName.value = profileName.textContent;
   inputProfession.value = profileProfession.textContent;
+  submitButtonIndisibled(config, buttonElement); 
   openPopup(popupEditProfile);
-  submitButtonIndisibled(config, buttonElement); //??
 }
 
 function openPopupPlace() {
@@ -140,7 +144,7 @@ function closePopup(popup) {
 }
 
 popups.forEach((popup) => {
-  popup.addEventListener('click', (evt) => closePopup(evt.target)); //??
+  popup.addEventListener('click', (evt) => closePopup(evt.target)); 
 })
 
 function closePopupByEsc(evt) {
