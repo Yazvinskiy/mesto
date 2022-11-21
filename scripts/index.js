@@ -1,4 +1,4 @@
-import {submitButtonIndisibled} from './validate.js';
+import {removeDisabledOnBtn} from './validate.js';
 
 const initialCards = [
   {
@@ -85,7 +85,6 @@ function initSections() {
   });
 }
 
-//open popups
 function openPopup(popup) {
   popup.classList.add(POPUP_OPENED_CLASS);
   document.body.addEventListener('keydown', closePopupByEsc); 
@@ -95,7 +94,7 @@ function openPopup(popup) {
 function openEditProfilePopup() {
   inputName.value = profileName.textContent;
   inputProfession.value = profileProfession.textContent;
-  submitButtonIndisibled(popupEditProfile.querySelector('.popup__btn-save')); 
+  removeDisabledOnBtn(popupEditProfile.querySelector('.popup__btn-save')); 
   openPopup(popupEditProfile);
 }
 
@@ -106,7 +105,7 @@ function openPopupPlace() {
 
 function likeCard(cardsElement) {
   cardsElement.classList.toggle('places__icon-like_active');
-};
+}
 
 
 function submitEditProfilePopup(evt) {
@@ -116,7 +115,6 @@ function submitEditProfilePopup(evt) {
   closePopup(popupEditProfile);
 }
 
-// submit cards
 const handleSubmitCard = (event) => {
   event.preventDefault();
   const newCardTitle = inputCardTitle.value;
@@ -130,9 +128,8 @@ const handleSubmitCard = (event) => {
 function addCard(cardsElement) {
 sectionPlace.prepend(cardsElement);
 resetForm();
-};
+}
 
-//delete cards
 const removeCard = (element) => {
   element.remove();
 }
@@ -145,11 +142,11 @@ function closePopup(popup) {
 
 popups.forEach((popup) => {
   popup.addEventListener('click', (evt) => closePopup(evt.target)); 
-})
+});
 
 function closePopupByEsc(evt) {
   if(evt.key === "Escape") {
-    closePopup(document.querySelector('.popup_opened')); //? 
+    closePopup(document.querySelector('.popup_opened')); 
   }
   }
 

@@ -30,22 +30,16 @@ const checkInputValidity = (config, formElement, inputElement) => {
   }
 }
 
-const submitButtonDisabled = (buttonElement) => {
-  buttonElement.disabled = true;
-}
 
-
-export function submitButtonIndisibled(buttonElement)  {
-  buttonElement.disabled = false;
+export function removeDisabledOnBtn(buttonElement)  {
+  buttonElement.classList.remove('popup__btn-save_disabled');
 }
 
 const toggleButtonState = (config, inputList, buttonElement) => {
   if(hasInvalidInput(inputList)) {
       buttonElement.classList.add(config.inactiveButtonClass);
-      submitButtonDisabled(config, buttonElement);
   } else {
       buttonElement.classList.remove(config.inactiveButtonClass);
-      submitButtonIndisibled(config, buttonElement);
   }
 }
 
