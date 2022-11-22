@@ -68,8 +68,7 @@ function openPopup(popup) {
 function openEditProfilePopup() {
   inputName.value = profileName.textContent;
   inputProfession.value = profileProfession.textContent;
-  //removeDisabledOnBtn (popupEditProfile.querySelector('.popup__btn-save')); 
-  //offDisableSubmit(popupBtnSubmit); /// OFF DISABLE SUBMIT 
+ // offDisableSubmit(popupBtnSubmit); /// OFF DISABLE SUBMIT 
   openPopup(popupEditProfile);
 }
 
@@ -94,7 +93,7 @@ const handleSubmitCard = (event) => {
   const newCardLink = inputLinkCard.value;
   const newCard = createCard(newCardTitle, newCardLink);
   addCard(newCard);
-  //onDisableSubmit(popupBtnSubmit); /// DISABLE SUBMIT AFTER ADD CARD
+ // onDisableSubmit(popupBtnSubmit); /// DISABLE SUBMIT AFTER ADD CARD
   closePopup(popupPlace);
   resetForm(formAddCard);
 }
