@@ -30,12 +30,12 @@ const checkInputValidity = (config, formElement, inputElement) => {
 
  function enableDisabledBtn(config, buttonElement) {
   buttonElement.classList.add(config.inactiveButtonClass);
-  buttonElement.disable = true;
+  buttonElement.setAttribute('disabled', true);
 }
 
 function removeDisabledOnBtn(config, buttonElement) {
   buttonElement.classList.remove(config.inactiveButtonClass);
-  buttonElement.disable = false;
+  buttonElement.removeAttribute('disabled', false);
 }
 
 const toggleButtonState = (config, inputList, buttonElement) => {
