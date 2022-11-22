@@ -1,3 +1,4 @@
+
 const hasInvalidInput = (inputList) => {
   return inputList.some((inputElement) => {
     return !inputElement.validity.valid;
@@ -28,21 +29,21 @@ const checkInputValidity = (config, formElement, inputElement) => {
   }
 }
 
- function enableDisabledBtn(config, buttonElement) {
+export function disableSaveButton(config, buttonElement) {
   buttonElement.classList.add(config.inactiveButtonClass);
   buttonElement.setAttribute('disabled', true);
 }
 
-function removeDisabledOnBtn(config, buttonElement) {
+export function enableSaveButton(config, buttonElement) {
   buttonElement.classList.remove(config.inactiveButtonClass);
   buttonElement.removeAttribute('disabled', false);
 }
 
 const toggleButtonState = (config, inputList, buttonElement) => {
   if (hasInvalidInput(inputList)) {
-    enableDisabledBtn(config, buttonElement);
+    disableSaveButton(config, buttonElement);
   } else {
-    removeDisabledOnBtn(config, buttonElement);
+    enableSaveButton(config, buttonElement);
   }
 }
 
@@ -61,30 +62,10 @@ const setEventListeners = (config, formElement) => {
   });
 }
 
-const enableValidation = (config) => {
+export const enableValidation = (config) => {
   const formList = Array.from(document.querySelectorAll(config.formSelector));
 
   formList.forEach((formElement) => {
     setEventListeners(config, formElement);
   });
-}
-
-export const enableValidate = 
-enableValidation ({
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__btn-save',
-  inactiveButtonClass: 'popup__btn-save_disabled',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__error_visible'
-}); 
-
-export const offDisableSubmit = function removeDisabledOnBtn(config, buttonElement) {
-  buttonElement.classList.remove(config.inactiveButtonClass);
-  buttonElement.disable = false;
-}
-
-export const onDisableSubmit =  function enableDisabledBtn(config, buttonElement) {
-  buttonElement.classList.add(config.inactiveButtonClass);
-  buttonElement.disable = true;
 }

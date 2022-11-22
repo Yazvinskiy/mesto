@@ -1,7 +1,6 @@
 import {initialCards} from './cards.js';
-import {enableValidate} from './validate.js';
-import {offDisableSubmit} from './validate.js';
-import {onDisableSubmit} from './validate.js';
+import {formConfig} from './cards.js';
+import {enableValidation, enableSaveButton, disableSaveButton} from './validate.js'
 
 
 const POPUP_OPENED_CLASS = 'popup_opened';
@@ -26,6 +25,7 @@ const popupImg = document.querySelector(".popup__image");
 const popupFullImgCaption = document.querySelector(".popup__caption");
 const popupBtnSubmit = document.querySelector('.popup__btn-save');
 const popups = document.querySelectorAll('.popup');
+
 
 
 function createCard(name, link) {
@@ -68,7 +68,8 @@ function openPopup(popup) {
 function openEditProfilePopup() {
   inputName.value = profileName.textContent;
   inputProfession.value = profileProfession.textContent;
- // offDisableSubmit(popupBtnSubmit); /// OFF DISABLE SUBMIT 
+  const buttonElement = popupEditProfile.querySelector(formConfig.submitButtonSelector);
+  enableSaveButton(formConfig, buttonElement);
   openPopup(popupEditProfile);
 }
 
@@ -93,7 +94,8 @@ const handleSubmitCard = (event) => {
   const newCardLink = inputLinkCard.value;
   const newCard = createCard(newCardTitle, newCardLink);
   addCard(newCard);
- // onDisableSubmit(popupBtnSubmit); /// DISABLE SUBMIT AFTER ADD CARD
+  const buttonElement = popupPlace.querySelector(formConfig.submitButtonSelector);
+  disableSaveButton(formConfig, buttonElement);
   closePopup(popupPlace);
   resetForm(formAddCard);
 }
@@ -140,4 +142,5 @@ popupBtnAdd.addEventListener('click',  openPopupPlace);
 formEditProfile.addEventListener('submit', submitEditProfilePopup);
 formAddCard.addEventListener("submit", handleSubmitCard);
 initSections();
+enableValidation(formConfig);
 
