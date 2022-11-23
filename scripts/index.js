@@ -1,6 +1,5 @@
-import {initialCards} from './cards.js';
-import {formConfig} from './cards.js';
-import {enableValidation, enableSaveButton, disableSaveButton} from './validate.js'
+import {initialCards, configValidation} from './constants.js';
+import {enableValidation, enableSaveButton, disableSaveButton} from './validate.js';
 
 
 const POPUP_OPENED_CLASS = 'popup_opened';
@@ -23,9 +22,7 @@ const profileProfession = document.querySelector(".profile__subtitle");
 const popupFullImage = document.querySelector(".popup_type_full-image");
 const popupImg = document.querySelector(".popup__image");
 const popupFullImgCaption = document.querySelector(".popup__caption");
-const popupBtnSubmit = document.querySelector('.popup__btn-save');
 const popups = document.querySelectorAll('.popup');
-
 
 
 function createCard(name, link) {
@@ -39,18 +36,17 @@ function createCard(name, link) {
   cardElement.querySelector('.places__title').textContent = name;
   removeButton.addEventListener("click", () => removeCard(cardElement));
   likeButton.addEventListener("click", () => likeCard(likeButton));
-  
 
-  imgWrapper.addEventListener('click', function (event) {
-    const currentCard = event.target;   
-    const name = currentCard.alt;
-    const link = currentCard.src;
-    popupImg.setAttribute('src', link);
-    popupFullImgCaption.setAttribute('alt', name);
-    popupFullImgCaption.textContent = name;
+ imgWrapper.addEventListener('click',  (evt) => {
+    const currentCard = evt.target;   
+    popupImg.src = currentCard.src;
+    popupFullImgCaption.alt = currentCard.alt;
+    popupFullImgCaption.textContent = currentCard.alt;
     openPopup( popupFullImage);
   });
+
  return cardElement;
+ 
 }
 
 function initSections() {
@@ -68,8 +64,8 @@ function openPopup(popup) {
 function openEditProfilePopup() {
   inputName.value = profileName.textContent;
   inputProfession.value = profileProfession.textContent;
-  const buttonElement = popupEditProfile.querySelector(formConfig.submitButtonSelector);
-  enableSaveButton(formConfig, buttonElement);
+  const buttonElement = popupEditProfile.querySelector(configValidation.submitButtonSelector);
+  enableSaveButton(configValidation, buttonElement);
   openPopup(popupEditProfile);
 }
 
@@ -94,10 +90,10 @@ const handleSubmitCard = (event) => {
   const newCardLink = inputLinkCard.value;
   const newCard = createCard(newCardTitle, newCardLink);
   addCard(newCard);
-  const buttonElement = popupPlace.querySelector(formConfig.submitButtonSelector);
-  disableSaveButton(formConfig, buttonElement);
+  const buttonElement = popupPlace.querySelector(configValidation.submitButtonSelector);
+  disableSaveButton(configValidation, buttonElement);
   closePopup(popupPlace);
-  resetForm(formAddCard);
+  formAddCard.reset();
 }
 
 function addCard(cardsElement) {
@@ -133,14 +129,10 @@ popupCloseBtn.forEach((button) => {
   button.addEventListener('click', () => closePopup(popup));
 });
 
-function resetForm(form) {
-  form.reset();
-}
 
 popupBtnEdit.addEventListener('click',  openEditProfilePopup); 
 popupBtnAdd.addEventListener('click',  openPopupPlace);   
 formEditProfile.addEventListener('submit', submitEditProfilePopup);
 formAddCard.addEventListener("submit", handleSubmitCard);
 initSections();
-enableValidation(formConfig);
-
+enableValidation(configValidation);
