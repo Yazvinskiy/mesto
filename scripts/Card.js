@@ -40,7 +40,7 @@ export class Card {
       this._element.querySelector('.places__icon-basket').addEventListener('click', () => {
           this._handleRemoveCard();
       });
-  
+
   }
   
     _handleOpenPopupImg() {
