@@ -19,36 +19,56 @@ const inputProfession = document.querySelector(".popup__input_user_profession");
 const profileName = document.querySelector(".profile__title");
 const profileProfession = document.querySelector(".profile__subtitle");
 const popups = document.querySelectorAll('.popup');
-
+const popupFullImage = document.querySelector(".popup_type_full-image");
+const popupImg = document.querySelector(".popup__image");
+const popupFullImgCaption = document.querySelector(".popup__caption");
 
 
 function createCard(data) {
-  const card = new Card(data, '#template-cards');
+  const card = new Card(data, '#template-cards', handleOpenPopupImg);
     const cardsElement = card.generateCard();
 
-    sectionPlace.prepend(cardsElement);
+    return cardsElement;
 }
 
-  initialCards.forEach(item => createCard(item));
+  initialCards.forEach( (item) => {
+    const newCard = createCard(item);
+    addCard(newCard);
+  });
 
+  
+  function addCard(cardsElement) {
+    sectionPlace.prepend(cardsElement);
+  }
 
-export function openPopup(popup) {
+  function handleOpenPopupImg(name, link) {
+    popupFullImgCaption.textContent = this._title;
+        popupImg.src = this._image;
+        popupImg.alt = this._title;
+        openPopup(popupFullImage);
+  }
+
+ function openPopup(popup) {
   popup.classList.add(POPUP_OPENED_CLASS);
-  document.body.addEventListener('keydown', closePopupByEsc); 
+  document.addEventListener('keydown', closePopupByEsc); 
 }
 
 const formProfileValidation = new FormValidator(configValidation, formEditProfile);
 formProfileValidation.enableValidation();
 
+
 function openEditProfilePopup() {
   inputName.value = profileName.textContent;
   inputProfession.value = profileProfession.textContent;
-
+  formProfileValidation.resetValidation();
   openPopup(popupEditProfile);
 }
 
+
 function openPopupPlace() {
+  formCardValidation.resetValidation();
   openPopup(popupPlace);
+  
 }
 
 function submitEditProfilePopup(evt) {
@@ -61,20 +81,21 @@ function submitEditProfilePopup(evt) {
 const formCardValidation = new FormValidator(configValidation, formAddCard);
 formCardValidation.enableValidation();
 
+
 const handleSubmitCard = (event) => {
   event.preventDefault();
-  createCard({name: inputCardTitle.value,
+  const newCard = createCard({name: inputCardTitle.value,
               link: inputLinkCard.value});
-              
+  addCard(newCard);
   closePopup(popupPlace);
   formAddCard.reset();
-  formCardValidation.enableValidation();
 }
 
 
 function closePopup(popup) {
   popup.classList.remove(POPUP_OPENED_CLASS);
-  document.body.removeEventListener('keydown', closePopupByEsc);
+  document.removeEventListener('keydown', closePopupByEsc);
+  
 }
 
 popups.forEach((popup) => {
