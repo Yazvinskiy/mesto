@@ -23,7 +23,7 @@ export class Card {
       this._cardTitle.textContent = this._title;
       this._cardImage.src = this._image;
       this._cardImage.alt = this._title;
-      
+  
       return this._element;
     }
   
