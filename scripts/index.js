@@ -2,11 +2,10 @@ import {initialCards, configValidation} from './constants.js';
 import {Card} from './Card.js';
 import {FormValidator} from './FormValidator.js';
 import Section from './Section.js';
-//import Popup from './Popup.js';
 import PopupWithImage from './PopupWithImage.js';
-//import UserInfo  from './UserInfo .js';
-//import PopupWithForm from './PopupWithForm.js';
-//import UserInfo from './UserInfo.js';
+import UserInfo  from './UserInfo.js';
+import PopupWithForm from './PopupWithForm.js';
+
 
 
 
@@ -50,46 +49,27 @@ const cardList = new Section({
 
 cardList.renderer(initialCards);
 
-/*
-function handleOpenPopupImg(name, link) {            функция откр картинки до рефакт
-  popupFullImgCaption.textContent = this._title;
-      popupImg.src = this._image;
-      popupImg.alt = this._title;
-      //openPopup(popupFullImage);
-}
 
-*/
-const popupWithImage = PopupWithImage(popupFullImage);
-popupWithImage.setEventListeners();
-
+const popupWithImage = new PopupWithImage(popupFullImage);
+//popupWithImage.setEventListeners();
 function handleOpenPopupImg(name, link) {
   popupWithImage.openPopupImg(name, link);
 }
 
 
-const openPopupPlace = new Popup(popupPlace);  
-
-/*
-function openPopup() {
-  formCardValidation.resetValidation();
- openPopupPlace.open();
-}
-*/
-
-
-
 const addCardPlaceForm = new PopupWithForm(popupPlace, {
+  
   handleFormSubmit: (inputValues) => {
+    
     const card = createCard(inputValues);
+    
     cardList.addItem(card);
     addCardPlaceForm.close();
+    
   }
 }
+
 );
-
-
-
-
 
 
 const formProfileValidation = new FormValidator(configValidation, formEditProfile);
@@ -97,6 +77,9 @@ formProfileValidation.enableValidation();
 
 const formCardValidation = new FormValidator(configValidation, formAddCard);
 formCardValidation.enableValidation();
+
+
+const user = new UserInfo(profileName, profileProfession)
 
 /*
 function openEditProfilePopup() {
@@ -163,8 +146,8 @@ popups.forEach((popup) => {
 */
 //popupBtnEdit.addEventListener('click',  openEditProfilePopup); 
 popupBtnAdd.addEventListener('click', () => {
+  formCardValidation.resetValidation();
   addCardPlaceForm.open();
-
 });   
 //formEditProfile.addEventListener('submit', submitEditProfilePopup);
-//formAddCard.addEventListener('submit', handleSubmitCard);
+//formAddCard.addEventListener('submit',  addCardPlaceForm);
