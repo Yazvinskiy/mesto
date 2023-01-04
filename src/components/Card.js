@@ -1,4 +1,4 @@
-export class Card {
+export default class Card {
     constructor(data, templateSelector, handleOpenPopupImg) {
       this._title = data.name;
       this._image = data.link;
@@ -15,8 +15,6 @@ export class Card {
     }
   
     generateCard() {
-      // Запишем разметку в приватное поле _element. 
-      // Так у других элементов появится доступ к ней.
       this._element = this._getTemplate();
       this._setEventListeners();
       
