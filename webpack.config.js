@@ -10,12 +10,12 @@ module.exports = {
         filename: 'main.js',
             publicPath: ''
       },
-      mode: 'production',
+      devtool: 'eval-source-map',
+      mode: 'development',
       devServer: {
         static: path.resolve(__dirname, './dist'),
         compress: true,
         port: 8080,
-    
         open: true
       },
       module: {
@@ -53,5 +53,6 @@ module.exports = {
         }),
         new CleanWebpackPlugin(),
         new MiniCssExtractPlugin()
-      ] 
-   }
+      ]
+      
+   };

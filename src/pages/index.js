@@ -1,4 +1,4 @@
-import '../pages/index.css';
+import "../pages/index.css";
 import { initialCards, configValidation } from "../utils/constants.js";
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
@@ -41,10 +41,21 @@ const cardList = new Section(
 
 cardList.renderer(initialCards);
 
+const formProfileValidation = new FormValidator(
+  configValidation,
+  formEditProfile
+);
+formProfileValidation.enableValidation();
+
+const formCardValidation = new FormValidator(configValidation, formAddCard);
+formCardValidation.enableValidation();
+
 const popupWithImage = new PopupWithImage(popupFullImage);
 function handleOpenPopupImg(name, link) {
   popupWithImage.openPopupImg(name, link);
 }
+
+popupWithImage.setEventListeners();
 
 const addCardPlaceForm = new PopupWithForm(popupPlace, {
   handleFormSubmit: (inputValues) => {
@@ -54,14 +65,7 @@ const addCardPlaceForm = new PopupWithForm(popupPlace, {
   },
 });
 
-const formProfileValidation = new FormValidator(
-  configValidation,
-  formEditProfile
-);
-formProfileValidation.enableValidation();
-
-const formCardValidation = new FormValidator(configValidation, formAddCard);
-formCardValidation.enableValidation();
+addCardPlaceForm.setEventListeners();
 
 const user = new UserInfo(profileName, profileProfession);
 
@@ -72,10 +76,13 @@ const popupUserProfile = new PopupWithForm(popupEditProfile, {
   },
 });
 
+popupUserProfile.setEventListeners();
+
 popupBtnEdit.addEventListener("click", () => {
   formProfileValidation.resetValidation();
-  inputName.value = user.getUserInfo().name;
-  inputProfession.value = user.getUserInfo().job;
+  const { job, name } = user.getUserInfo();
+  inputName.value = name;
+  inputProfession.value = job;
   popupUserProfile.open();
 });
 
