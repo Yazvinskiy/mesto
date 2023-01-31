@@ -18,8 +18,12 @@ export default class PopupWithForm extends Popup {
     return this._formInputValues;
   }
 
-  loadDataIndicator(str) {
-    this._buttonSubmit.textContent += str;
+  setElementContent(newContent) {
+    this._buttonSubmit.textContent = newContent;
+  }
+  
+  getElementContent() {
+   return this._buttonSubmit.textContent;
   }
 
   setEventListeners() {

@@ -42,14 +42,18 @@ let userId;
 
 const user = new UserInfo(profileName, profileProfession);
 
-Promise.all([api.getUserData(), api.getInitialCards()]).then(
-  ([userData, initialCards]) => {
-    userId = userData._id;
-    user.setUserInfo(userData);
-    user.setUserAvatar(userData.avatar);
-    cardList.renderer(initialCards);
-  }
-);
+rerender();
+
+function rerender(){
+  Promise.all([api.getUserData(), api.getInitialCards()]).then(
+    ([userData, initialCards]) => {
+      userId = userData._id;
+      user.setUserInfo(userData);
+      user.setUserAvatar(userData.avatar);
+      cardList.renderer(initialCards);
+    }
+  );
+}
 
 const popupWithConformation = new PopupWithConformation(popupConformation);
 popupWithConformation.setEventListeners();
@@ -101,8 +105,12 @@ const cardList = new Section(
 
 ///Add new card
 const addCardPlaceForm = new PopupWithForm(popupPlace, async (inputValues) => {
+  const initialValue = addCardPlaceForm.getElementContent();
+  addCardPlaceForm.setElementContent(initialValue + '...');
   await api.createCard(inputValues).then((data) => cardList.addItem(data));
+  addCardPlaceForm.setElementContent(initialValue);
   addCardPlaceForm.close();
+  rerender();
 });
 
 addCardPlaceForm.setEventListeners();
