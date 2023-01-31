@@ -67,16 +67,20 @@ function createCard(data) {
     "#template-cards",
     handleOpenPopupImg,
     async (id) => {
-      popupWithConformation.open(async () => {
-        await api.deleteCard(id);
+      popupWithConformation.open(() => {
+        api.deleteCard(id);
         card.removeCard();
         popupWithConformation.close();
       });
     },
     async (data, userId) => {
-      data.likes.some((i) => i._id === userId)
-        ? await api.dislikeCard(data._id)
-        : await api.likeCard(data._id);
+      try {
+        data.likes.some((i) => i._id === userId)
+          ? await api.dislikeCard(data._id)
+          : await api.likeCard(data._id);
+      } catch (err) {
+        console.log(err);
+      }
     },
     userId
   );
@@ -97,10 +101,8 @@ const cardList = new Section(
 
 ///Add new card
 const addCardPlaceForm = new PopupWithForm(popupPlace, async (inputValues) => {
-  addCardPlaceForm.loadDataIndicator("...");
   await api.createCard(inputValues).then((data) => cardList.addItem(data));
   addCardPlaceForm.close();
-  addCardPlaceForm.loadDataIndicator("");
 });
 
 addCardPlaceForm.setEventListeners();
@@ -112,12 +114,14 @@ popupBtnAdd.addEventListener("click", () => {
 
 ///PopupWithAvatar
 const popupAvatarProfile = new PopupWithForm(popupAvatar, async (data) => {
-  addCardPlaceForm.loadDataIndicator("...");
-  await api.editAvatar(data.link).then((data) => {
-    user.setUserAvatar(data.avatar);
-  });
-  popupAvatarProfile.close();
-  addCardPlaceForm.loadDataIndicator("");
+  try {
+    await api.editAvatar(data.link).then((data) => {
+      user.setUserAvatar(data.avatar);
+    });
+    popupAvatarProfile.close();
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 popupAvatarProfile.setEventListeners();
@@ -131,8 +135,12 @@ avatarButton.addEventListener("click", () => {
 const popupUserProfile = new PopupWithForm(
   popupEditProfile,
   async (userData) => {
-    await api.setUserData(userData);
-    popupUserProfile.close();
+    try {
+      await api.setUserData(userData);
+      popupUserProfile.close();
+    } catch (err) {
+      console.log(err);
+    }
   }
 );
 
