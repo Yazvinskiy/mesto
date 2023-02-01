@@ -21,10 +21,6 @@ export default class PopupWithForm extends Popup {
   setElementContent(newContent) {
     this._buttonSubmit.textContent = newContent;
   }
-  
-  getElementContent() {
-   return this._buttonSubmit.textContent;
-  }
 
   setEventListeners() {
     super.setEventListeners();

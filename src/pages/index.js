@@ -42,18 +42,14 @@ let userId;
 
 const user = new UserInfo(profileName, profileProfession);
 
-rerender();
-
-function rerender(){
-  Promise.all([api.getUserData(), api.getInitialCards()]).then(
-    ([userData, initialCards]) => {
-      userId = userData._id;
-      user.setUserInfo(userData);
-      user.setUserAvatar(userData.avatar);
-      cardList.renderer(initialCards);
-    }
-  );
-}
+Promise.all([api.getUserData(), api.getInitialCards()]).then(
+  ([userData, initialCards]) => {
+    userId = userData._id;
+    user.setUserInfo(userData);
+    user.setUserAvatar(userData.avatar);
+    cardList.renderer(initialCards);
+  }
+);
 
 const popupWithConformation = new PopupWithConformation(popupConformation);
 popupWithConformation.setEventListeners();
@@ -77,11 +73,15 @@ function createCard(data) {
         popupWithConformation.close();
       });
     },
-    async (data, userId) => {
+    async (data, isLiked) => {
       try {
-        data.likes.some((i) => i._id === userId)
-          ? await api.dislikeCard(data._id)
-          : await api.likeCard(data._id);
+        if (isLiked) {
+          data = await api.dislikeCard(data._id);
+          card.show(data);
+        } else {
+          data = await api.likeCard(data._id);
+          card.show(data);
+        }
       } catch (err) {
         console.log(err);
       }
@@ -105,12 +105,16 @@ const cardList = new Section(
 
 ///Add new card
 const addCardPlaceForm = new PopupWithForm(popupPlace, async (inputValues) => {
-  const initialValue = addCardPlaceForm.getElementContent();
-  addCardPlaceForm.setElementContent(initialValue + '...');
-  await api.createCard(inputValues).then((data) => cardList.addItem(data));
-  addCardPlaceForm.setElementContent(initialValue);
-  addCardPlaceForm.close();
-  rerender();
+  try {
+    addCardPlaceForm.setElementContent("Coздать...");
+    const data = await api.createCard(inputValues);
+    addCardPlaceForm.close();
+    cardList.addItem(data);
+  } catch (err) {
+    console.log(err);
+  } finally {
+    addCardPlaceForm.setElementContent("Создать");
+  }
 });
 
 addCardPlaceForm.setEventListeners();
@@ -123,9 +127,8 @@ popupBtnAdd.addEventListener("click", () => {
 ///PopupWithAvatar
 const popupAvatarProfile = new PopupWithForm(popupAvatar, async (data) => {
   try {
-    await api.editAvatar(data.link).then((data) => {
-      user.setUserAvatar(data.avatar);
-    });
+    const avatarLink = await api.editAvatar(data.link);
+    user.setUserAvatar(avatarLink.avatar);
     popupAvatarProfile.close();
   } catch (err) {
     console.log(err);
@@ -144,10 +147,14 @@ const popupUserProfile = new PopupWithForm(
   popupEditProfile,
   async (userData) => {
     try {
+      popupUserProfile.setElementContent("Cохранить...");
       await api.setUserData(userData);
+      user.setUserInfo(userData);
       popupUserProfile.close();
     } catch (err) {
       console.log(err);
+    } finally {
+      popupUserProfile.setElementContent("Cохранить");
     }
   }
 );
