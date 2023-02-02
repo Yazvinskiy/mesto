@@ -20,7 +20,6 @@ export default class Card {
     this._handleLikeCard = handleLikeCard;
   }
 
-
   _getTemplate() {
     const cardElement = document
       .querySelector(this._templateSelector)
@@ -46,7 +45,7 @@ export default class Card {
     this._deleteButton = this._element.querySelector(".places__icon-basket");
     this._cardTitle = this._element.querySelector(".places__title");
     this._cardImage = this._element.querySelector(".places__image");
-    this._likeCounter = this._element.querySelector(".places__like-counter"); 
+    this._likeCounter = this._element.querySelector(".places__like-counter");
     this._showBasketIcon();
     this._showLikeCard();
 
@@ -75,24 +74,22 @@ export default class Card {
   }
 
   _showLikeCard() {
-    this._likes.some((like) => like._id === this._userId)
+    this._isLiked()
       ? this._likeButton.classList.add("places__icon-like_active")
       : this._likeButton.classList.remove("places__icon-like_active");
   }
 
   _isLiked() {
-  return this._likes.some((like) => like._id === this._userId);
+    return this._likes.some((like) => like._id === this._userId);
   }
 
   _likesCounter() {
-   this._likeCounter.textContent = this._likes.length;
-       
+    this._likeCounter.textContent = this._likes.length;
   }
 
   show(data) {
     this._likes = data.likes;
     this._likesCounter();
     this._showLikeCard();
-   }
- 
+  }
 }
