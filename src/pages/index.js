@@ -96,8 +96,8 @@ function createCard(data) {
 const cardList = new Section(
   {
     render: (data) => {
-      const card = createCard(data);
-      cardList.addItem(card);
+      // const card = createCard(data);
+      cardList.addItem(createCard(data));
     },
   },
   sectionPlace

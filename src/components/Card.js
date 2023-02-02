@@ -46,7 +46,7 @@ export default class Card {
     this._deleteButton = this._element.querySelector(".places__icon-basket");
     this._cardTitle = this._element.querySelector(".places__title");
     this._cardImage = this._element.querySelector(".places__image");
-    this._likeCounter = this._element.querySelector(".places__like-counter"); ///
+    this._likeCounter = this._element.querySelector(".places__like-counter"); 
     this._showBasketIcon();
     this._showLikeCard();
 
