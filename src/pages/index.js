@@ -12,20 +12,12 @@ import Api from "../components/Api.js";
 import {
   formAddCard,
   formAvatar,
-  sectionPlace,
   popupBtnEdit,
   popupBtnAdd,
-  popupEditProfile,
-  popupPlace,
   formEditProfile,
   inputName,
   inputProfession,
-  profileName,
-  profileProfession,
-  popupFullImage,
   avatarButton,
-  popupAvatar,
-  popupConformation,
 } from "../utils/constants.js";
 
 const apiConfig = {
@@ -40,23 +32,29 @@ const api = new Api(apiConfig);
 
 let userId;
 
-const user = new UserInfo(profileName, profileProfession);
+const user = new UserInfo(
+  ".profile__title",
+  ".profile__subtitle",
+  ".profile__avatar"
+);
 
 Promise.all([api.getUserData(), api.getInitialCards()])
   .then(([userData, initialCards]) => {
     userId = userData._id;
     user.setUserInfo(userData);
-    user.setUserAvatar(userData.avatar);
+    user.setUserAvatar(userData);
     cardList.renderer(initialCards);
   })
   .catch((err) => {
     console.log(err);
   });
 
-const popupWithConformation = new PopupWithConformation(popupConformation);
+const popupWithConformation = new PopupWithConformation(
+  ".popup_type_confirmation"
+);
 popupWithConformation.setEventListeners();
 
-const popupWithImage = new PopupWithImage(popupFullImage);
+const popupWithImage = new PopupWithImage(".popup_type_full-image");
 popupWithImage.setEventListeners();
 
 function handleOpenPopupImg(name, link) {
@@ -68,21 +66,25 @@ function createCard(data) {
     data,
     "#template-cards",
     handleOpenPopupImg,
-    async (id) => {
-      popupWithConformation.open(() => {
-        api.deleteCard(id);
-        card.removeCard();
-        popupWithConformation.close();
+    (id) => {
+      popupWithConformation.open(async () => {
+        try {
+          await api.deleteCard(id);
+          card.removeCard();
+          popupWithConformation.close();
+        } catch (err) {
+          console.log(err);
+        }
       });
     },
     async (data, isLiked) => {
       try {
         if (isLiked) {
           data = await api.dislikeCard(data._id);
-          card.show(data);
+          card.showLike(data);
         } else {
           data = await api.likeCard(data._id);
-          card.show(data);
+          card.showLike(data);
         }
       } catch (err) {
         console.log(err);
@@ -101,40 +103,49 @@ const cardList = new Section(
       cardList.addItem(createCard(data));
     },
   },
-  sectionPlace
+  ".places"
 );
 
 ///Add new card
-const addCardPlaceForm = new PopupWithForm(popupPlace, async (inputValues) => {
-  try {
-    addCardPlaceForm.setElementContent("Coздать...");
-    const data = await api.createCard(inputValues);
-    addCardPlaceForm.close();
-    cardList.addItem(createCard(data));
-  } catch (err) {
-    console.log(err);
-  } finally {
-    addCardPlaceForm.setElementContent("Создать");
+const popupAddCardPlace = new PopupWithForm(
+  ".popup_type_place",
+  async (inputValues) => {
+    try {
+      popupAddCardPlace.setElementContent("Coздать...");
+      const data = await api.createCard(inputValues);
+      popupAddCardPlace.close();
+      cardList.addItem(createCard(data));
+    } catch (err) {
+      console.log(err);
+    } finally {
+      popupAddCardPlace.setElementContent("Создать");
+    }
   }
-});
+);
 
-addCardPlaceForm.setEventListeners();
+popupAddCardPlace.setEventListeners();
 
 popupBtnAdd.addEventListener("click", () => {
   formCardValidation.resetValidation();
-  addCardPlaceForm.open();
+  popupAddCardPlace.open();
 });
 
 ///PopupWithAvatar
-const popupAvatarProfile = new PopupWithForm(popupAvatar, async (data) => {
-  try {
-    const avatarLink = await api.editAvatar(data.link);
-    user.setUserAvatar(avatarLink);
-    popupAvatarProfile.close();
-  } catch (err) {
-    console.log(err);
+const popupAvatarProfile = new PopupWithForm(
+  ".popup_type_avatar",
+  async (data) => {
+    try {
+      popupAvatarProfile.setElementContent("Cохранить...");
+      const avatar = await api.editAvatar(data.link);
+      user.setUserAvatar(avatar);
+      popupAvatarProfile.close();
+    } catch (err) {
+      console.log(err);
+    } finally {
+      popupAvatarProfile.setElementContent("Cохранить");
+    }
   }
-});
+);
 
 popupAvatarProfile.setEventListeners();
 
@@ -145,7 +156,7 @@ avatarButton.addEventListener("click", () => {
 
 //PopupInfoUser
 const popupUserProfile = new PopupWithForm(
-  popupEditProfile,
+  ".popup_type_edit-profile",
   async (userData) => {
     try {
       popupUserProfile.setElementContent("Cохранить...");

@@ -32,7 +32,9 @@ export default class Card {
   generateCard() {
     this._element = this._getTemplate();
     this._setEventListeners();
-    this._likesCounter(); ////?
+    this._likesCounter(); 
+    this._showBasketIcon();
+    this._showLikeCard();
     this._cardTitle.textContent = this._title;
     this._cardImage.src = this._image;
     this._cardImage.alt = this._title;
@@ -46,9 +48,7 @@ export default class Card {
     this._cardTitle = this._element.querySelector(".places__title");
     this._cardImage = this._element.querySelector(".places__image");
     this._likeCounter = this._element.querySelector(".places__like-counter");
-    this._showBasketIcon();
-    this._showLikeCard();
-
+  
     this._cardImage.addEventListener("click", () => {
       this._handleOpenPopupImg(this._title, this._image);
     });
@@ -87,7 +87,7 @@ export default class Card {
     this._likeCounter.textContent = this._likes.length;
   }
 
-  show(data) {
+  showLike(data) {
     this._likes = data.likes;
     this._likesCounter();
     this._showLikeCard();
