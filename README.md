@@ -1,7 +1,7 @@
 # Проект: "Mesto"
 
 * [Ссылка на проект "Mesto"](https://yazvinskiy.github.io/mesto/index.html)
-* ![CopyOf](https://user-images.githubusercontent.com/110602440/222746528-d206e14e-3697-4e8b-be1c-210ceecfcbc2.png)
+ ![CopyOf](https://user-images.githubusercontent.com/110602440/222746528-d206e14e-3697-4e8b-be1c-210ceecfcbc2.png)
 
 ## О проекту
   __Проект: Mesto__ - это интерактивный, адаптивный сайт, для пользователей,который включает различный функционал, для пользователей:
